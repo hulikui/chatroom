@@ -2,9 +2,28 @@ var express = require('express'),
     app = express(),
     server = require('http').createServer(app),
     io = require('socket.io').listen(server),
+    fs=require('fs'),
     users = [];
 //specify the html we will use
-app.use('/', express.static(__dirname + '/www'));
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/www'));
+//var connect = require("connect");
+app.use(express.cookieParser());
+app.use(express.session({
+	secret: 'www.ssforum.top', 
+	cookie: { domain:'www.ssforum.com'},	
+	//store:sessionStore,
+	//key:''
+	}));
+app.get('/',function(req,res){
+ console.log(req.cookies);
+var sessionid=req.cookies['connect.sid'];
+ var id=sessionid.replace(/[&\|\\\\/*!$()^%$#,@\:;.-]/g,"");
+var user=JSON.parse(fs.readFileSync('/root/Code/sessions/'+id+'.json'));
+console.log(user);
+res.render('index',{user:user});
+});
 //bind the server to the 80 port
 //server.listen(3000);//for local test
 server.listen(process.env.PORT || 3000);//publish to heroku

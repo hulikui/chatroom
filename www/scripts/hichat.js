@@ -17,7 +17,7 @@ HiChat.prototype = {
         var that = this;
         this.socket = io.connect();
         this.socket.on('connect', function() {
-            document.getElementById('info').textContent = '欢迎进入，请点击确认';
+            document.getElementById('info').innerHTML = '欢迎同学进入聊天室，请点击确认';
             document.getElementById('nickWrapper').style.display = 'block';
             document.getElementById('nicknameInput').focus();
         });
@@ -37,7 +37,8 @@ HiChat.prototype = {
             }
         });
         this.socket.on('system', function(nickName, userCount, type) {
-            var msg = nickName + (type == 'login' ? ' 加入聊天室' : ' left');
+           nickName=nickName||'无名氏';
+	    var msg = nickName + (type == 'login' ? ' 加入聊天室' : '已离开');
             that._displayNewMsg('系统 ', msg, 'red');
 			var users="<button type='button' class='btn btn-default btn-xs'>"+
   "<span class='glyphicon glyphicon-user'></span><span class='glyphicon glyphicon-user'></span> Users"+

@@ -6,8 +6,9 @@ html, body {
 	background-size: 100% 100%
 }
 .wrapper {
-    width: 500px;
-    height: 710px;
+    width: 80%;
+    min-width:300px;
+    height: 100%;
     padding: 5px;
     margin: 0 auto;
     background-color: #fff;
@@ -48,6 +49,7 @@ html, body {
 }
 .controls {
     height: 100px;
+    min-width:250px;
     margin: 5px 0px;
     position: relative;
 }
@@ -86,14 +88,12 @@ html, body {
 /*end custom file input*/
 
 #messageInput {
-    width: 440px;
-    max-width: 440px;
-    height: 90px;
-    max-height: 90px;
+    width: 90%;
+    height: 96px;
     float:left;
 }
 #sendBtn {
-    width: 50px;
+    width: 10%;
     height: 96px;
     float: right;
 }
